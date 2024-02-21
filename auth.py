@@ -18,16 +18,20 @@ def authenticate():
 
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
+        print("No valid credentials found.")
         if creds and creds.expired and creds.refresh_token:
+            print('Refreshing credentials...')
             creds.refresh(Request())
         else:
+            print('Creating new credentials...')
             flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
+        print("Authentication successful. token.json has been saved.")
         with open("token.json", "w") as token:
             token.write(creds.to_json())
 
 
 if __name__ == "__main__":
     authenticate()
-    print("Authentication successful. token.json has been saved.")
+    print('Authentication is successful')

@@ -54,10 +54,14 @@ def select_random_date():
 
 
 def main():
-    creds = get_credentials()
-    event_date = select_random_date()
-    create_event(creds, event_date)
-
+    try:
+        creds = get_credentials()
+        event_date = select_random_date()
+        create_event(creds, event_date)
+    except Exception as e:
+        error_message = f"calenar-reminder: failed to create the event: {str(e)}"
+        print(error_message)
+        send_telegram_message(error_message)
 
 if __name__ == "__main__":
     main()

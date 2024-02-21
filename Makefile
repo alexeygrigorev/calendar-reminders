@@ -8,6 +8,6 @@ run: auth
 	@echo "Running the main application..."
 	pipenv run python main.py
 
-deploy:
+deploy: auth
 	@echo "Deploying the application to lambda"
 	bash deploy_to_lambda.sh

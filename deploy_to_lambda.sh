@@ -18,7 +18,8 @@ cd lambda_package
 pip install --target ./package -r requirements.txt
 
 # Add your Python code to the 'package' directory
-cp ../main.py ../telegram.py ./package
+cp ../*.py ./package
+cp ../token.json ./package
 
 
 # Zip the contents of the 'package' directory
