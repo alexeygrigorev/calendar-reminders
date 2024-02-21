@@ -144,3 +144,41 @@ chmod +x deploy_to_lambda.sh
 ```
 
 **Note**: For the AWS CLI upload to work, you need the AWS CLI installed and configured with the appropriate permissions.
+
+
+## Scheduling Lambda with Amazon EventBridge
+
+### Step 1: Open Amazon EventBridge
+1. Navigate to the [Amazon EventBridge service](https://eu-west-1.console.aws.amazon.com/events/home) in the AWS Management Console.
+
+### Step 2: Create Rule
+1. Click on "Create rule".
+2. Enter a name and description for your rule. (e.g. "present-reminder")
+
+### Step 3: Define Trigger with Cron
+- For "Define pattern", select "Schedule".
+- Choose "Cron expression" and enter your desired cron schedule.
+
+  Example for running at 8 AM on the first day of every month:
+
+  ```
+  cron(0 8 1 * ? *)
+  ```
+- Check next 10 trigger dates to verify that the trigger is set correctly
+
+### Step 4: Select Target
+- In the "Select targets" section, choose "Lambda function" as the target.
+- Select your Lambda function from the dropdown list.
+
+### Step 5: Configure Input (Optional)
+
+```json
+{"test": true}
+```
+
+(it doesn't really matter)
+
+### Step 6: Deploy Rule
+1. Click "Create" to deploy your rule.
+
+Your Lambda function is now scheduled to run monthly via Amazon EventBridge.
